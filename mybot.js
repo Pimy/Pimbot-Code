@@ -88,10 +88,4 @@ client.on('message', message => {
 	}
 });
 
-client.login("Mjc0MDE2NjI5NzY1OTYzNzc2.C3ahJg.x-FCK3sXIJz8-OGIouZnPyx3fSM");
-
-
-
-//Mjc0MDE2NjI5NzY1OTYzNzc2.C3ahJg.x-FCK3sXIJz8-OGIouZnPyx3fSM
-
-
+client.login("token-here");
