@@ -7,15 +7,16 @@ function commandIs(str, msg){
 	return msg.content.startsWith(prefix + str);
 }
 client.on('ready', () => {
-	//client.gamePlayingName('Call of Duty: Black Ops 10');
-	//client.setStatus('online', 'Call of Duty: Black Ops 10');
-	//client.setStatusIdle();
 	client.user.setStatus("dnd")
 	client.user.setGame(gameid)
 	console.log("The Bot Is Now Running!");
 });
 
+function doMagic8BallVoodoo() {
+    var rand = ['Yes', 'No', 'Why are you even trying?', 'What do you think? NO', 'Maybe', 'Never', 'Yep'];
 
+    return rand[Math.floor(Math.random()*rand.length)];
+}
 
 client.on('message', message => {
 	
@@ -44,20 +45,26 @@ client.on('message', message => {
 	}
 	
 	if (commandIs("cat", message)){
-		message.channel.sendMessage("```Meow!T```")
+		message.channel.sendMessage("Meow! :cat:")
 	}
-	
-		/*if(message.author.username === "Sinon"){
-			message.channel.sendMessage("ping")
-		}*/
 	
 	if (commandIs("colour", message)){
 		message.channel.sendMessage("```http" + "\n" + "SO COLOURFULL```")
 	}
 	
+	if (commandIs("info", message)){
+		let creatorobj = message.server.members.get("name", "Pimy")
+	message.channel.sendMessage("Creator = " + `${creatorobj}`)
+	}
+	
+	if (commandIs("dm", message)){
+		message.author.sendMessage('hello!')
+		message.channel.sendMessage(message.author.username + "You have been DMed")
+	}
+	
 	if(commandIs("say", message)){
 		if(args.length === 1){
-			client.deleteMessage(message);
+			//client.deleteMessage(message);
 			message.channel.sendMessage("What do you want me to say? Usage: `>say [message]`")
 		} else { message.channel.sendMessage(args.join(" ").substring(5)) }
 	}
@@ -68,10 +75,16 @@ client.on('message', message => {
 		} else { message.channel.sendMessage(("I was told to say ") + args.join(" ").substring(6)) }
 	}
 	
+	if(commandIs("quote", message)){
+		if(args.length === 1){
+			message.channel.sendMessage("What do you want me to say? Usage: `>tsay [message]`")
+		} else { message.channel.sendMessage + args.join(" - 2017").substring(6) }
+	}
+	
 	if (commandIs("kys", message)){
 		message.channel.sendMessage("oops I died")
 		message.channel.sendMessage("```http" + "\n" + "-dies-```")
-		message.channel.sendMessage("What have you done " + message.author.username + " ب_ب")
+		message.channel.sendMessage("What have you done " + message.author.username + " пе_пе")
 	}
 
 	if (commandIs("inv", message) && message.author.username === "Pimy tm"){
@@ -82,9 +95,44 @@ client.on('message', message => {
 		}
 	}
 	
-	if (commandIs("help", message)){
-		message.channel.sendMessage("```diff" + "\n" + "- Commands:" + "\n" + "+ kys(An example of multiposting)" + "\n" + "+ say" + "\n" + "+ tsay" + "\n" + "+ die" + "\n" + "+ help" + "\n" + "+ garble" + "\n" + "+ cat" + "\n" + "+ colour" + "\n" + "+ inv" + "\n" + "+ setplay```")
+	if (commandIs("help" || "pimbot help!", message)){
+		message.channel.sendMessage("```diff" + "\n" + "- Commands:" + "\n" + "+ kys(An example of multiposting)" + "\n" + "+ say" + "\n" + "+ tsay" + "\n" + "+ die" + "\n" + "+ help" + "\n" + "+ garble" + "\n" + "+ cat" + "\n" + "+ colour" + "\n" + "+ inv" + "\n" + "+ setplay" + "\n" + "+ sell" + "\n" + "+ buy" + "\n" + "+ ping" + "\n" + "+ shop```")
+		message.author.sendMessage("```diff" + "\n" + "- Commands:" + "\n" + "+ kys(An example of multiposting)" + "\n" + "+ say" + "\n" + "+ tsay" + "\n" + "+ die" + "\n" + "+ help" + "\n" + "+ garble" + "\n" + "+ cat" + "\n" + "+ colour" + "\n" + "+ inv" + "\n" + "+ setplay" + "\n" + "+ sell" + "\n" + "+ buy" + "\n" + "+ ping" + "\n" + "+ shop```")
 		
+	}
+	
+	if (commandIs("hellp", message)){
+        message.channel.sendMessage("Help is on the way " + message.author.username + ", check your DMs.")
+        message.author.sendMessage("Test DM.")
+    }
+	
+	if(commandIs("sell", message)){
+		if(args.length === 1){
+			message.channel.sendMessage("What do you want to sell? Usage: `>sell [colour]`")
+		} else { 
+		if(args.join !== "blue" || "red" || "orange" || "green" || "black" || "yellow" || "purple" || "pink" || "white"){
+		message.channel.sendMessage((message.author.username + " sold") + args.join(" ") + (":moneybag:").substring(5)) }}
+	}
+	
+	if(commandIs("buy", message)){
+		if(args.length === 1){
+			message.channel.sendMessage("What do you want to buy? Usage: `>buy [colour]`")
+		} else { 
+		if(args.join !== "blue" || "red" || "orange" || "green" || "black" || "yellow" || "purple" || "pink" || "white"){
+		message.channel.sendMessage((message.author.username + " bought") + args.join(" ") + (":money_with_wings:").substring(4)) }}
+	}
+	
+	if (message.content === "ping") {
+		let blackrole = message.guild.roles.find("name", "Just Black")
+        if (message.member.roles.has(blackrole.id)) {
+            message.channel.sendMessage("pong");
+        }else{
+			message.channel.sendMessage("you do not have the 'Just Black' role")
+		}
+    }
+	
+	if (commandIs("shop", message)){
+		message.channel.sendMessage("```diff" + "\n" + "-Shop Page 1 of 1" + "\n" + " - Colors" + "\n" + "+ Red 60g" + "\n" + "+ Orange 50g " + "\n" + "+ Yellow 60g" + "\n" + "+ Green 50g" + "\n" + "+ Blue 60g" + "\n" + "+ Purple 50g" + "\n" + "+ Pink 50g" + "\n" + "+ White 80g" + "\n" + "+ Black 80g```" + "\n" + "`Type >buy [item name] to buy`")
 	}
 });
 
